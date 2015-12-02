@@ -1,7 +1,7 @@
-# simplepush
+# SimplePush
 
-1. Send mail:
-
+Send mail
+======
 ```
 use SimplePush;
 $aConfigs = array(
@@ -25,7 +25,12 @@ $oInstance->send();
 $mResults = $oInstance->getResults();
 $aTmpError = $oInstance->getErrors();
 ```
-2. Push to Android device
+
+
+Push to Android device
+======
+
+
 ```
 use SimplePush;
 $aConfigs = array(
@@ -46,7 +51,10 @@ $oInstance->send();
 $mResults = $oInstance->getResults();
 $aTmpError = $oInstance->getErrors();
 ```
-3. Push to iOS device
+
+
+Push to iOS device
+======
 
 ```
 use SimplePush;
