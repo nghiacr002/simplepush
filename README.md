@@ -1,6 +1,8 @@
 # simplepush
 
 1. Send mail:
+
+```
 use SimplePush;
 $aConfigs = array(
 	'method' => smtp //or mail
@@ -22,3 +24,6 @@ $oInstance->to("nicetomeetyou@fwebshop.com");
 $oInstance->send();
 $mResults = $oInstance->getResults();
 $aTmpError = $oInstance->getErrors();
+```
+2. Push to Android device
+3. Push to iOS device
