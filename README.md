@@ -14,8 +14,7 @@ $aMessage = array(
 	'subject' => "Hello Mail"
     'content' => "Mail content"
     'from' => hello@fwebshop.com
-    'from_name' => "Hello F"
-    
+
 );
 $oInstance = new SimplePush\Mail($aConfigs);
 $oInstance->message($aMessage);
