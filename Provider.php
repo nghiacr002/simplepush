@@ -1,15 +1,28 @@
 <?php
     namespace SimplePush;
     abstract class Provider {
-    	protected $sVersion; 
+    	protected $sVersion;
     	protected $sName;
     	static $sBasePath;
     	protected $aConfigs;
     	protected $aMesages;
     	protected $aErrors;
-    	protected $sCallBackPoint; 
+    	protected $sCallBackPoint;
     	protected $bDevelopmentMode;
     	protected $mResults;
+    	public function __construct($aConfigs)
+    	{
+    		$this->aConfigs = $aConfigs;
+    		if(isset($aConfigs['app_mode']) && $aConfigs['app_mode'] == "development")
+    		{
+    			$this->development(true);
+    		}
+    		else
+    		{
+    			$this->development(false);
+    		}
+    		$this->clean();
+    	}
     	public function development($bValue)
     	{
     		$this->bDevelopmentMode = $bValue;
@@ -31,14 +44,9 @@
     		}
     		return self::$sBasePath;
     	}
-        public function __construct($aConfigs)
-        {
-        	$this->aConfigs = $aConfigs;
-        	
-        	$this->clean();
-        }
+
         public function from($mValue)
-        { 
+        {
         	$this->aMesages['from'] = $mValue;
         	return $this;
         }
@@ -84,7 +92,7 @@
         		'target_name' => '',
         		'message' => '',
         		'configs' => array(),
-        	); 
+        	);
         	$this->aErrors = array();
         	$this->sCallBackPoint = "";
         	return $this;
@@ -120,9 +128,9 @@
         	curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
         	curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $aData ) );
         	$result = curl_exec($ch );
-        	
+
         	curl_close( $ch );
-        	
+
         	return $result;
         }
         public function validate()
@@ -132,7 +140,7 @@
         		$this->aErrors[] = "Message Body cannot be empty";
         		return false;
         	}
-        	
+
         	if(!isset($this->aMesages['target_id']) || empty($this->aMesages['target_id']))
         	{
         		$this->aErrors[] = "Must have at least 1 receiver";
@@ -153,5 +161,5 @@
         	return $this;
         }
     }
-    
+
 ?>
